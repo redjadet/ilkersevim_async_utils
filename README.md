@@ -3,26 +3,16 @@
 Dependency-free Dart guards for coalescing concurrent async work and rejecting
 stale async completions.
 
-License: [Apache-2.0](LICENSE). Issues:
+License: [Apache-2.0](LICENSE). Package:
+[pub.dev/packages/ilkersevim_async_utils](https://pub.dev/packages/ilkersevim_async_utils).
+Issues:
 [github.com/redjadet/ilkersevim_async_utils/issues](https://github.com/redjadet/ilkersevim_async_utils/issues).
 
 ## Installation
 
-Pub.dev (when published):
-
 ```yaml
 dependencies:
   ilkersevim_async_utils: ^0.1.0
-```
-
-Git (until Pub.dev upload):
-
-```yaml
-dependencies:
-  ilkersevim_async_utils:
-    git:
-      url: https://github.com/redjadet/ilkersevim_async_utils.git
-      ref: v0.1.0
 ```
 
 ## InFlightCoalescer
@@ -65,3 +55,11 @@ Future<void> load() async {
 
 Public type names and method signatures are a semantic-versioned contract.
 Breaking changes require a major version bump.
+
+## Publishing
+
+Releases are tagged `vX.Y.Z` matching `pubspec.yaml`. Automated publishing uses
+GitHub Actions OIDC with the protected `pub.dev` Environment (reviewer:
+`redjadet`). Configure Pub.dev Admin → Automated publishing for repository
+`redjadet/ilkersevim_async_utils`, tag pattern `v{{version}}`, environment
+`pub.dev`.
