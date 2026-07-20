@@ -2,7 +2,7 @@ name: ilkersevim_async_utils
 description: >-
   Small dependency-free Dart guards for coalescing concurrent work and
   rejecting stale async completions.
-version: 0.1.0
+version: 0.1.1
 repository: https://github.com/redjadet/ilkersevim_async_utils
 homepage: https://github.com/redjadet/ilkersevim_async_utils
 issue_tracker: https://github.com/redjadet/ilkersevim_async_utils/issues
