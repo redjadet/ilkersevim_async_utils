@@ -3,6 +3,13 @@
 Dependency-free Dart guards for coalescing concurrent async work and rejecting
 stale async completions.
 
+## Why use this package?
+
+- Stop duplicate refresh, save, or fetch work when callers trigger the same
+  operation concurrently.
+- Ignore an older async result after a newer request has started.
+- Add both protections without runtime dependencies or framework coupling.
+
 License: [Apache-2.0](LICENSE). Package:
 [pub.dev/packages/ilkersevim_async_utils](https://pub.dev/packages/ilkersevim_async_utils).
 Issues:
@@ -12,7 +19,7 @@ Issues:
 
 ```yaml
 dependencies:
-  ilkersevim_async_utils: ^0.1.0
+  ilkersevim_async_utils: ^0.1.2
 ```
 
 ## InFlightCoalescer
