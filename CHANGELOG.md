@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2
+
+- Explain when coalescing and request guards prevent duplicate work and stale
+  updates.
+- Rewrite package metadata around those use cases.
+
 ## 0.1.1
 
 - Docs: install section uses hosted pub.dev constraint only (package already published).
