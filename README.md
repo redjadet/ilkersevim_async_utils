@@ -19,8 +19,10 @@ Issues:
 
 ```yaml
 dependencies:
-  ilkersevim_async_utils: ^0.1.2
+  ilkersevim_async_utils: ^0.1.3
 ```
+
+Requires Dart `>=3.13.0`.
 
 ## InFlightCoalescer
 

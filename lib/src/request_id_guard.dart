@@ -30,5 +30,5 @@ class RequestIdGuard {
   }
 
   /// Returns true if [id] is still the latest request (no [next] or [invalidate] since).
-  bool isCurrent(final int id) => id == currentId;
+  bool isCurrent(int id) => id == currentId;
 }

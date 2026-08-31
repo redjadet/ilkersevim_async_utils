@@ -18,7 +18,7 @@ class InFlightCoalescer {
 
   /// Runs [work] or returns the existing future if work is already in flight.
   /// When the future completes, the gate is cleared so the next call starts fresh.
-  Future<void> run(final Future<void> Function() work) {
+  Future<void> run(Future<void> Function() work) {
     final Future<void>? inFlight = _future;
     if (inFlight != null) {
       return inFlight;
@@ -28,13 +28,13 @@ class InFlightCoalescer {
     unawaited(
       f.then<void>(
         (_) => _clear(f),
-        onError: (final Object _, final StackTrace _) => _clear(f),
+        onError: (Object _, StackTrace _) => _clear(f),
       ),
     );
     return f;
   }
 
-  void _clear(final Future<void> future) {
+  void _clear(Future<void> future) {
     if (identical(_future, future)) {
       _future = null;
     }
@@ -57,7 +57,7 @@ class KeyedInFlightCoalescer<K> {
 
   /// Runs [work] for [key], or returns the existing future if work for [key] is in flight.
   /// When the future completes, the key is cleared.
-  Future<void> run(final K key, final Future<void> Function() work) {
+  Future<void> run(K key, Future<void> Function() work) {
     final Future<void>? inFlight = _byKey[key];
     if (inFlight != null) {
       return inFlight;
@@ -67,13 +67,13 @@ class KeyedInFlightCoalescer<K> {
     unawaited(
       f.then<void>(
         (_) => _clear(key, f),
-        onError: (final Object _, final StackTrace _) => _clear(key, f),
+        onError: (Object _, StackTrace _) => _clear(key, f),
       ),
     );
     return f;
   }
 
-  void _clear(final K key, final Future<void> future) {
+  void _clear(K key, Future<void> future) {
     if (identical(_byKey[key], future)) {
       _byKey.remove(key);
     }

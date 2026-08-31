@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.3
+
+- Raise minimum SDK to Dart `>=3.13.0`.
+- Pin CI to Dart 3.13.2 stable.
+
 ## 0.1.2
 
 - Explain when coalescing and request guards prevent duplicate work and stale
