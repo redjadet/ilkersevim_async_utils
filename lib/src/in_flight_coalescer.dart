@@ -23,21 +23,40 @@ class InFlightCoalescer {
     if (inFlight != null) {
       return inFlight;
     }
-    final Future<void> f = Future<void>.sync(work);
-    _future = f;
-    unawaited(
-      f.then<void>(
-        (_) => _clear(f),
-        onError: (Object _, StackTrace _) => _clear(f),
-      ),
-    );
-    return f;
-  }
 
-  void _clear(Future<void> future) {
-    if (identical(_future, future)) {
-      _future = null;
+    // Reserve the gate before [work] runs so reentrant [run] calls coalesce.
+    final Completer<void> gate = Completer<void>();
+    _future = gate.future;
+
+    void finish() {
+      if (identical(_future, gate.future)) {
+        _future = null;
+      }
     }
+
+    try {
+      Future<void>.sync(work).then<void>(
+        (_) {
+          if (!gate.isCompleted) {
+            gate.complete();
+          }
+          finish();
+        },
+        onError: (Object error, StackTrace stackTrace) {
+          if (!gate.isCompleted) {
+            gate.completeError(error, stackTrace);
+          }
+          finish();
+        },
+      );
+    } on Object catch (error, stackTrace) {
+      if (!gate.isCompleted) {
+        gate.completeError(error, stackTrace);
+      }
+      finish();
+    }
+
+    return gate.future;
   }
 }
 
@@ -62,20 +81,38 @@ class KeyedInFlightCoalescer<K> {
     if (inFlight != null) {
       return inFlight;
     }
-    final Future<void> f = Future<void>.sync(work);
-    _byKey[key] = f;
-    unawaited(
-      f.then<void>(
-        (_) => _clear(key, f),
-        onError: (Object _, StackTrace _) => _clear(key, f),
-      ),
-    );
-    return f;
-  }
 
-  void _clear(K key, Future<void> future) {
-    if (identical(_byKey[key], future)) {
-      _byKey.remove(key);
+    final Completer<void> gate = Completer<void>();
+    _byKey[key] = gate.future;
+
+    void finish() {
+      if (identical(_byKey[key], gate.future)) {
+        _byKey.remove(key);
+      }
     }
+
+    try {
+      Future<void>.sync(work).then<void>(
+        (_) {
+          if (!gate.isCompleted) {
+            gate.complete();
+          }
+          finish();
+        },
+        onError: (Object error, StackTrace stackTrace) {
+          if (!gate.isCompleted) {
+            gate.completeError(error, stackTrace);
+          }
+          finish();
+        },
+      );
+    } on Object catch (error, stackTrace) {
+      if (!gate.isCompleted) {
+        gate.completeError(error, stackTrace);
+      }
+      finish();
+    }
+
+    return gate.future;
   }
 }

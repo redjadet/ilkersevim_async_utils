@@ -2,7 +2,7 @@ name: ilkersevim_async_utils
 description: >-
   Prevent duplicate async work and stale result updates with dependency-free
   Dart coalescers and request guards.
-version: 0.1.3
+version: 0.1.4
 repository: https://github.com/redjadet/ilkersevim_async_utils
 homepage: https://github.com/redjadet/ilkersevim_async_utils
 issue_tracker: https://github.com/redjadet/ilkersevim_async_utils/issues
