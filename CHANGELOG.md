@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.4
+
+- Fix coalescers so a nested `run()` at the start of in-flight work shares the
+  same gate instead of starting duplicate work (reentrant `Future.sync` window).
+
 ## 0.1.3
 
 - Raise minimum SDK to Dart `>=3.13.0`.
