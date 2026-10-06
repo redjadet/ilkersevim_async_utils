@@ -1,5 +1,9 @@
 # ilkersevim_async_utils
 
+[![pub package](https://img.shields.io/pub/v/ilkersevim_async_utils.svg)](https://pub.dev/packages/ilkersevim_async_utils)
+[![CI](https://github.com/redjadet/ilkersevim_async_utils/actions/workflows/ci.yml/badge.svg)](https://github.com/redjadet/ilkersevim_async_utils/actions/workflows/ci.yml)
+[![License](https://img.shields.io/github/license/redjadet/ilkersevim_async_utils)](LICENSE)
+
 Dependency-free Dart guards for coalescing concurrent async work and rejecting
 stale async completions.
 
@@ -19,7 +23,7 @@ Issues:
 
 ```yaml
 dependencies:
-  ilkersevim_async_utils: ^0.1.3
+  ilkersevim_async_utils: ^0.1.4
 ```
 
 Requires Dart `>=3.13.0`.
